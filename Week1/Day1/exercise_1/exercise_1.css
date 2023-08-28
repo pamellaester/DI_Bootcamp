@@ -1,0 +1,17 @@
+
+
+.paragraph {
+    border: 1px solid red;
+    text-align: center;
+    color: red;
+}
+
+.table_title {
+    border: 1px solid black;
+    text-align: center;
+ }
+ 
+ .table_content {
+     border: 1px solid black;
+     text-align: center;
+  }
