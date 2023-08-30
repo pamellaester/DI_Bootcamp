@@ -1,0 +1,17 @@
+body {
+    margin: 0%;
+
+}
+
+.navbar {
+    
+}
+    
+.background-poster {
+   /* opacity: 90%;*/
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
