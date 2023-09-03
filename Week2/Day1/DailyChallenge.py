@@ -1,3 +1,6 @@
+import random
+
+
 string_question = input("insert a string \n")
 if len(string_question) < 10:
     print("string not long enough \n")
@@ -15,5 +18,17 @@ character = "helloworld"
 for index in range(len(character)):
     print(character[:index+1])
 
+
+# Original list
+letter_list = ["H","e","l","l","o","w","o","r","l","d"]
+print(letter_list)
+
+# List after first shuffle
+random.shuffle(letter_list)
+print(letter_list) 
+
+# List after second shuffle
+random.shuffle(letter_list)
+print(letter_list)
 
 
