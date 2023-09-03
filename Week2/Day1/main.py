@@ -36,6 +36,5 @@ question = input("how many miles do you want to convert?\n")
 sentence = sentence.repalce("miles",question)
 print(sentence)
         
-user_miles = float(input("give me a number of miles"))    
-convert_ti_km = user_miles *1.60934 
-print  
+user_miles =float(input("give me a number of miles"))    
+convert_ti_km = user_miles *1.60934   
