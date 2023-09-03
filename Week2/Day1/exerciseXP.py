@@ -1,9 +1,5 @@
 # exercise 1:
-hello = "Hello world"
-print("{}".format(hello))
-print("{}".format(hello))
-print("{}".format(hello))
-print("{}".format(hello))
+print("Hello world! \nHello world! \nHello world! \nHello world!")
 
 # exercise 2:
 print((99^3)*8)
@@ -17,7 +13,7 @@ print((99^3)*8)
 
 # exercise 4:
 computer_brand = "apple"
-print("I have a {} computer".format(computer_brand))
+print(f"I have a {computer_brand} computer")
 
 # exercise 5:
 name = "Pamella Ester"
