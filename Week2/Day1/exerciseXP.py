@@ -1,5 +1,5 @@
 # exercise 1:
-print("Hello world! \nHello world! \nHello world! \nHello world!")
+print("Hello world! \n"*4)
 
 # exercise 2:
 print((99^3)*8)
@@ -14,6 +14,7 @@ print((99^3)*8)
 # exercise 4:
 computer_brand = "apple"
 print(f"I have a {computer_brand} computer")
+
 
 # exercise 5:
 name = "Pamella Ester"
