@@ -46,10 +46,6 @@ ul {
     position: relative;
 }
 
-br { 
-  clear: none;
-}
-
   section  { 
     max-width: 250px;
     float: inline-start;  
