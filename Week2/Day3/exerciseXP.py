@@ -82,10 +82,34 @@
 
 
 # Exercise 4 : Disney Characters
-import operator
+
 users = ["Mickey","Minnie","Donald","Ariel","Pluto"]
 
+# /1
+# word_dict = {}
+# for position, letter in enumerate(users):
+#     word_dict[letter] = position
+# print(word_dict)
 
-
-
+# /2
 # print(dict(enumerate(users)))
+
+#  /3
+# users.sort(key=str.lower)
+# word_dict = {}
+# for position, letter in enumerate(users):
+#     word_dict[letter] = position
+# print(word_dict)
+
+# /4
+# The characters, which names contain the letter “i”.
+# The characters, which names start with the letter “m” or “p”.
+
+word_dict = {}
+for position, letter in enumerate(users):
+    word_dict[letter] = position
+print(word_dict)
+
+
+
+# /Users/pamella/Desktop/DI_Bootcamp/Week2/Day3/exerciseXP.py

@@ -1,12 +1,24 @@
 # Challenge 1
 
-ask_user = input("insert a word \n")
-answer = dict(list(enumerate(ask_user)))
-print(answer)
+# ask_user = 
+
+user_answer = input("insert a word \n")
+
+word_dict = {}
+for position,letter in enumerate(user_answer):
+    if letter in word_dict:
+        word_dict[letter].append(position)
+    else:
+      word_dict[letter] = [position]
+
+print(word_dict)
+
+
+
 
 # challenge 2
 
-wallet = 300
+# wallet = 300
 # bread_price = "3"
 
 # if walet >= bread_price :
@@ -80,25 +92,25 @@ wallet = 300
 # else : 
 #     print("I don't have enougn money") 
 
-bank_amount = 10000
-computer_price = 12000
-phone_price = 13000
-bottle_price = 10
+# bank_amount = 10000
+# computer_price = 12000
+# phone_price = 13000
+# bottle_price = 10
 
-# at least one condition to be True
-if bank_amount >= computer_price:
-    print("I'm buying a computer")
-    bank_amount -= computer_price
-    print(f"I have {bank_amount} dollars left")
-elif bank_amount >= phone_price :
-    print("I'm buying a phone") 
-    bank_amount -= phone_price
-    print(f"I have {bank_amount} dollars left")
-elif bank_amount >= bottle_price :
-    print("I'm buying a bottle") 
-    bank_amount -= bottle_price
-    print(f"I have {bank_amount} dollars left")
-else : 
-    print("I don't have enougn money") 
+# # at least one condition to be True
+# if bank_amount >= computer_price:
+#     print("I'm buying a computer")
+#     bank_amount -= computer_price
+#     print(f"I have {bank_amount} dollars left")
+# elif bank_amount >= phone_price :
+#     print("I'm buying a phone") 
+#     bank_amount -= phone_price
+#     print(f"I have {bank_amount} dollars left")
+# elif bank_amount >= bottle_price :
+#     print("I'm buying a bottle") 
+#     bank_amount -= bottle_price
+#     print(f"I have {bank_amount} dollars left")
+# else : 
+#     print("I don't have enougn money") 
 
-print("out")
+# print("out")
