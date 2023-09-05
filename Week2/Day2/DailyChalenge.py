@@ -14,3 +14,7 @@ user_question = input("Insert a word with duplicated letters. Exemplo= looooolll
 
 result = "".join(dict.fromkeys(user_question))
 print(result)
+
+word = "ttiiiiittlllee"
+new_word = "t"
+word

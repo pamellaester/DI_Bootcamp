@@ -32,7 +32,6 @@ print(fruit)
 # exercise 4:
 # An integer is a number without a decimal point. A float is a floating-point number, which means it is a number that has a decimal place.
 
-arange()
 sequence = []
 for number in range(1, 6):
     float = number + 0.5
@@ -45,7 +44,7 @@ for num in range(21) :
     if num % 2 == 0 :
         print(num)
         
-exercise-6
+# exercise-6
 # you can also user_name = ""
 my_name = "raquel"
 while True:       # you can also user_name != my_name
