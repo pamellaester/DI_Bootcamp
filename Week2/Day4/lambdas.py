@@ -22,13 +22,13 @@
 # print ('the number {a} is odd')
 
 
-def highest_even (li):
-   evens = []
-   for item in li:
-     item % 2 == 0 
-     evens.append(item)
-     # function to reach te hights amount in the list
-    return max(evens)    
+# def highest_even (li):
+#    evens = []
+#    for item in li:
+#      item % 2 == 0 
+#      evens.append(item)
+#      # function to reach te hights amount in the list
+#     return max(evens)    
     
 
-print(highest_even ([10,2,3,4,5,6,11]))
+# print(highest_even ([10,2,3,4,5,6,11]))

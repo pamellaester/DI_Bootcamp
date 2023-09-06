@@ -17,11 +17,11 @@ column2 = matrix_list [1::4]
 column2 = matrix_list [2::4]
 
 message = ""
-def process_column(column: list[str]) 
-  for char in column:
+def process_column(column: list[str]): 
+    for char in column:
        if char.isalpha():
           message += char
-   return message 
+    return message 
 
 message1 = process_column (column1)
 print(message)  
