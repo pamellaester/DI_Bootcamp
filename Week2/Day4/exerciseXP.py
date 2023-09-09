@@ -53,9 +53,9 @@
 
 # Exercise 7 : Temperature Advice
 
-# def get_random_temp(a,b):
-#     Celsius = a < b 
-#     print(Celsius)
+def get_random_temp(a):
+ while(a > 100 or a < -10 ):
+    print(int(input("")))
 
 # get_random_temp(-10,40)
    
