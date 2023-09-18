@@ -104,7 +104,37 @@
 
 # # Exercise 8 : Faker Module
 
-# users = []
+from faker import Faker
+fake = Faker()
+
+
+
+def add_dict(num_users):
+    users_list = []
+    for i in range(1,num_users):
+        users = {}
+        users["name"] = fake.name()
+        users["adress"] = fake.adress()
+        users["language_code"] = fake.random_element(elements = ("English","Spanish","Portuguese","Hebrew","French"))
+        users_list.append(users)
+    return users_list
+
+print(add_dict())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
