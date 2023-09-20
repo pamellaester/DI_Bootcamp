@@ -16,12 +16,10 @@ class AnagramChecker:
     
         
 
-    # def get_anagrams(word):
-    #     pass
+    def get_anagrams(word):
+        pass
+        
 
    
     # def is_anagram(word1, word2):
     #     pass
-
-
-  
