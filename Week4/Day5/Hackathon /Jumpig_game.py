@@ -24,16 +24,29 @@ GRAVITY = 1
 MAX_PLATFORMS = 10
 scroll = 0
 bg_scroll = 0
-
+game_over = False
+score = 0
+fade_counter = 0
 
 # define colours
 WHITE = (255, 255, 255)
+BLACK = (0 , 0, 0)
+
+# define font 
+font_small = pygame.font.SysFont("Lucida Sans", 20)
+font_big = pygame.font.SysFont("Lucida Sans", 24)
 
 #load images 
 cute_image = pygame.image.load("cute.png").convert_alpha()
 bg_image = pygame.image.load("bg.png").convert_alpha()
 bg = pygame.transform.scale(bg_image, (800, 550))
 platform_png = pygame.image.load("platform.png").convert_alpha()
+
+# function for outputting text onto the screen
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    screen.blit(img, (x, y))
+
 
 # function for drawing the background
 def draw_bg(bg_scroll):
@@ -61,10 +74,10 @@ class Player():
         # process keypresses
         key = pygame.key.get_pressed()
         if key[pygame.K_LEFT]:
-            dx = -15
+            dx = -20
             self.flip = True
         if key[pygame.K_RIGHT]:
-            dx = 15
+            dx = 20
             self.flip = False
 
         # gravity
@@ -87,12 +100,6 @@ class Player():
                         self.rect.bottom = platform.rect.top
                         dy = 0
                         self.vel_y = - 20
-
-
-        # check collision with the ground
-        if self.rect.bottom + dy > SCREEN_HEIGHT:
-            dy = 0
-            self.vel_y = - 20
 
         #check if the player has bounced to the top of the screen
         if self.rect.top <= SCROLL_THRESH:
@@ -123,6 +130,10 @@ class Platform(pygame.sprite.Sprite):
         #update platfrom vertical position
         self.rect.y += scroll
 
+        # check if the platform has gone off the screen
+        if self.rect.top > SCREEN_HEIGHT:
+            self.kill()
+
 
 # player instance
 jump_1 = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT -150)
@@ -132,7 +143,7 @@ jump_1 = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT -150)
 platform_group = pygame.sprite.Group() 
 
 # create start plataform
-platform = Platform(SCREEN_WIDTH//2 - 80,SCREEN_HEIGHT -50, 150)
+platform = Platform(SCREEN_WIDTH//2 - 80,SCREEN_HEIGHT - 50, 150)
 platform_group.add(platform)
 
 #game loop
@@ -140,30 +151,66 @@ run = True
 while run:
    
    clock.tick(FPS)
+   if game_over == False:
+        scroll = jump_1.move()
+        
+            
+        #draw background 
+        bg_scroll += scroll
+        if bg_scroll >= 550:
+            bg_scroll = 0
+        draw_bg(scroll)
+
+            #generate plataforms
+        if len(platform_group) < MAX_PLATFORMS:
+            p_w = random.randint(60, 80)
+            p_x = random.randint(0, SCREEN_WIDTH - p_w)
+            p_y = platform.rect.y - random.randint(80, 150)
+            platform = Platform(p_x, p_y, p_w)
+            platform_group.add(platform)
+
+            print(len(platform_group))
+
+        # update platforms
+        platform_group.update(scroll)
+
+        #draw sprites
+        platform_group.draw(screen)
+        jump_1.draw()
+        
+        #check game over
+        if jump_1.rect.top > SCREEN_HEIGHT:
+            game_over = True
    
-   scroll = jump_1.move()
-   
+   else:
+       if fade_counter < SCREEN_WIDTH:
+           fade_counter += 10
+           for y in range(0, 6, 2):
+                pygame.draw.rect(screen, BLACK, (0, y * 100, fade_counter, 100)) 
+                pygame.draw.rect(screen, BLACK, (SCREEN_WIDTH - fade_counter, (y+1) * 100, SCREEN_WIDTH, 100 )) 
+       draw_text("GAME OVER", font_big, WHITE, SCREEN_WIDTH//2 -50, 200)
+       draw_text("SCORE: " + str(score), font_big, WHITE, SCREEN_WIDTH//2 - 40, 250)
+       draw_text("PRESS SPACE TO PLAY AGAIN", font_big, WHITE, SCREEN_WIDTH//2 - 130, 300)
+       key = pygame.key.get_pressed()
+       if key[pygame.K_SPACE]:
+        # reset variables
+        game_over = False
+        score = 0
+        scroll = 0
+        fade_counter = 0
+        # reposition jump_1
+        jump_1.rect.center = (SCREEN_WIDTH//2,SCREEN_HEIGHT -150)
+        # reset platforms
+        platform_group.empty()
+        # create start plataform
+        platform = Platform(SCREEN_WIDTH//2 - 80,SCREEN_HEIGHT - 50, 150)
+        platform_group.add(platform)
+
     
-   #draw background 
-   bg_scroll += scroll
-   if bg_scroll >= 550:
-       bg_scroll = 0
-   draw_bg(scroll)
+     
 
-#generate platafroms
-if len(platform_group) < MAX_PLATFORMS:
-   platform = Platform(SCREEN_WIDTH//2 - 80,SCREEN_HEIGHT -50, 150)
-   platform_group.add(platform)
 
-   print(len(platform_group))
 
-# update platforms
-   platform_group.update(scroll)
-
-   #draw sprites
-   platform_group.draw(screen)
-   jump_1.draw()
-   
    #event handler
    for event in pygame.event.get():
         if event.type == pygame.QUIT:
