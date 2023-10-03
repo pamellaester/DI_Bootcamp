@@ -1,12 +1,10 @@
 from menu_item import MenuItems
 from menu_manager import MenuManager
-
 def show_user_menu():
     user_action = input("What would you like to do?\nView an Item = 'V'\nAdd an Item = 'A'\nDelete an Item = 'D'\nUpdate an Item = 'U'\nShow the Menu = 'S'\nExit the menu = 'E'\n")
     while user_action not in "VADUSE":
         print("you have to type a letter from the menu")
         user_action = input("what would you like to do?\nView an Item = 'V'\nAdd an Item = 'A'\nDelete an Item = 'D'\nUpdate an Item = 'U'\nShow the Menu = 'S'\n")
-
 def view_item():
     user_view = input("witch item would you like to see? ")
     item = MenuManager(user_view)
@@ -49,8 +47,6 @@ def show_menu():
         
 def exit():
     MenuManager.all_items
-
-
 def main(user_action):
     while True:
         show_user_menu()
@@ -63,7 +59,7 @@ def main(user_action):
         if user_action == "U":
             update_item()
         if user_action == "S":
-            show_menu()
+             show_menu()
         if user_action == "E":
-            exit()
-        break
+             exit()
+        break    
