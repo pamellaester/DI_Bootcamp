@@ -1,9 +1,6 @@
 # import libraries
-import pygame
-import random
-import os
+import pygame, psycopg2, psycopg2.extras, os, json, random
 from pygame import mixer
-
 
 #initialise pygame
 mixer.init()
@@ -37,13 +34,56 @@ MAX_PLATFORMS = 10
 scroll = 0
 bg_scroll = 0
 game_over = False
-score = 0
+data_high_score = {"name" : "player", "score" : 0 }
+score =  0 
 fade_counter = 0
-if os.path.exists("score.txt"):
-    with open("score.txt", "r") as file:
-        high_score = int(file.read())
+high_score = score
+if os.path.exists("scores.txt"):
+    with open("scores.txt") as file:
+       data_high_score = json.load(file)
 else:
     high_score = 0
+
+# connect with sql
+
+# variables sql
+DB_NAME = "score_data"
+USER = "postgres" 
+PASSWORD = "postgres" 
+HOST = "localhost"
+PORT = "5433"
+connection = None
+
+# start conection with sql
+try:
+    with psycopg2.connect(
+        dbname = DB_NAME,
+        user = USER,
+        password = PASSWORD,
+        host = HOST,
+        port = PORT
+        ) as connection:
+
+        with connection.cursor(cursor_factory= psycopg2.extras.DictCursor) as cursor:
+            
+            #if table doesn't exist create one
+            cursor.execute("drop table if exists scores")
+            create_table = ''' create table scores(
+                                id serial primary key,
+                                name varchar (50) not null,
+                                score int not null);'''
+            cursor.execute(create_table)
+            
+            #inserting score to data
+            insert_table = "insert into scores (name, score) values (%s, %s)"
+            insert_values = (data_high_score["name"], data_high_score["score"])
+            cursor.execute(insert_table, insert_values)
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    if connection is not None:
+        connection.close()
+print("MySQL connection is closed")
 
 # define colours
 WHITE = (251,236,254,255)
@@ -224,8 +264,8 @@ while run:
             score += scroll
 
         # draw line at previous high score 
-        pygame.draw.line(screen, WHITE, (0,score - high_score + SCROLL_THRESH),(SCREEN_WIDTH,score - high_score + SCROLL_THRESH),3)
-        draw_text("HIGH SCORE", font_small, WHITE, SCREEN_WIDTH - 90, score - high_score + SCROLL_THRESH)
+        # pygame.draw.line(screen, WHITE, (0,score - data_high_score["score"] + SCROLL_THRESH),(SCREEN_WIDTH,score - high_score + SCROLL_THRESH),3)
+        # draw_text("HIGH SCORE", font_small, WHITE, SCREEN_WIDTH - 90, score - high_score + SCROLL_THRESH)
 
         #draw sprites
         platform_group.draw(screen)
@@ -249,9 +289,9 @@ while run:
         draw_text("PRESS SPACE TO PLAY AGAIN", font_big, WHITE, SCREEN_WIDTH//2 - 130, 400)
         #update high score
         if score > high_score:
-            high_score = score
-            with open("score.txt", "w") as file:
-                file.write(str(high_score))     
+            data_high_score["score"] = score
+            with open("scores.txt", "w") as file:
+                json.dump(data_high_score, file)     
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
             # reset variables
@@ -276,9 +316,9 @@ while run:
    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             if score > high_score:
-                high_score = score
-                with open("score.txt", "w") as file:
-                    file.write(str(high_score))    
+                data_high_score["score"] = score
+                with open("scores.txt", "w") as file:
+                    json.dump(data_high_score, file) 
             run = False
 
    #update display window
