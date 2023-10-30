@@ -1,1 +1,1 @@
-{"name": "player", "score": 2704}
+{"name": "player", "score": 2582}
