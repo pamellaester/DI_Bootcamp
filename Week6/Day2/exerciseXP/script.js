@@ -90,9 +90,7 @@
 // paragraph.addEventListener("mouseover", highlight);
 // paragraph.addEventListener("mouseout", returnItemsToDefault);
 
-
 // Exercice 4 : Volume Of A Sphere
-
 
 // const form = document.getElementById("MyForm");
 // const radiusInput = document.getElementById("radius");
